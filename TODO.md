@@ -1,0 +1,30 @@
+- Kreirati logo
+- Kreirati favicon, android-chrome, apple-touch icon varijante
+- ~~Kreiraj devclubme github organizaciju~~ devclubme
+- Poboljsaj README.md
+- Kreiraj email adresu za kontakt
+- Podesi zoho email za atim i dodaj forwarding
+- Kreiraj seed data za razlicite kategorije
+  - https://www.facebook.com/notes/startup-montenegro/list-of-active-startups-in-montenegro/2380808032153393/
+  - startup
+  - kompanije (pib)
+  - podrsku
+  - it fakultete
+- Osmisli nacin za admin interfejs za updejtovanje informacija CMS tipa
+- Dodaj logo za sve ucesnike ili automatski slovni avatar ukoliko ga oni nemaju ili ga mi jos nismo dodali
+  - S3
+  - Auth (cognito identity)
+
+- Funnel
+  - startup-ovi (broj aktivnih, procijenjena vrijednost investicija, rast broja aktivnih u odnosu na prethodnu godinu)
+  - it kompanije (broj kompanija, broj zaposlenih, prihodi za prethodnu godinu, i procenti rasta za sve metrike)
+  - institucije podrske (broj aktivnih institucija, broj dogadjaja, procijenjena vrijednost podrske)
+  - it fakulteti (broj studenata, broj koji izlazi svake godine, procijenjeni kvalitet)
+
+- Sekcija startup-ovi
+  - Header liste treba da sadrzi metrike na vizuelne atraktivan nacin prikazane
+  - 3 metrike, broj aktivnih, broj founder-a, vrijednost investicija sa apsolutnom i vrijednoscu promjene
+  - dodatna pojasnjenja da se radi o procjenama na hover ikonice ?
+  - Tijelo liste sadrzi po red za svaki startup sortirane rastuce po vrijednosti atributa rank
+  - Red prikazuje logo, naziv, oneliner, fazu i status
+  - 
