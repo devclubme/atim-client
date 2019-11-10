@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import Trend from 'react-trend';
 import { API } from "aws-amplify";
-import { Link } from "react-router-dom";
-import Button from '@material-ui/core/Button';
 import TrendCard from '../containers/TrendCard';
 import Typography from '@material-ui/core/Typography';
 import Navigation from '../containers/Navigation'
@@ -12,13 +9,11 @@ import CompanyTable from '../containers/CompanyTable'
 import 'typeface-roboto';
 import _ from "lodash";
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
 import "../css/Home.css";
 
-const src = '/images/image.png'
 
 export default class Home extends Component {
   constructor(props) {
@@ -75,7 +70,7 @@ export default class Home extends Component {
           <Grid item md align="center">
             <Typography variant="h2" component="h2" gutterBottom>
               companies
-        </Typography>
+            </Typography>
           </Grid>
           <Grid item md>
             <TrendCard
@@ -88,12 +83,12 @@ export default class Home extends Component {
         </Grid>
       </Container>
         <Container>
-          <CompanyTable></CompanyTable>
+          <CompanyTable data={actors} pulloutFinancialTrends={this.pulloutFinancialTrends}></CompanyTable>
         </Container>
       </Box >)
   }
 
-  renderStartupStats(actors) {
+  renderStartupStats() {
     return (
       < Box >
         <Container>
@@ -162,7 +157,7 @@ export default class Home extends Component {
       <div className="Home">
         <Navigation />
         {!this.state.isLoading && this.renderActors(this.state.actors, this.state.actor_trends)}
-        {!this.state.isLoading && this.renderStartupStats(this.state.actors)}
+        {!this.state.isLoading && this.renderStartupStats()}
       </div >
     );
   }

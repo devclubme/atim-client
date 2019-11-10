@@ -3,14 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import Trend from 'react-trend';
-import EuroIcon from '@material-ui/icons/Euro';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
@@ -30,16 +27,32 @@ function createData(name, protein, expense_period, income, expense, one_liner, i
     return { name, protein, expense_period, income, expense, one_liner, image_source };
 }
 
-const rows = [
-    createData('Uhura Solutions', [4.0, 12, 2, 4, 5, 23], [4.3, 12, 2, 4, 15], 560043, 342342, 'Uhura is an god like AI platform', 'https://res.cloudinary.com/practicaldev/image/fetch/s--ipV6F4tM--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/serverless/assets/master/Icon/Framework/PNG/Serverless_Framework-icon01.png'),
-    createData('Talkini', [4.3, 7, 2, 4, 5, 18], [4.3, 12, 2, 4, 0], 2341234, 12341, 'Platform to talk', 'https://www.edigitalagency.com.au/wp-content/uploads/instagram-logo-png-paint-brush-colour-1.png'),
-    createData('Ideus', [6.0, 2, 2, 4, 5, 42], [4.3, 12, 2, 4, 5, 100], 2134123, 12341, 'We like ideas', 'https://res.cloudinary.com/practicaldev/image/fetch/s--ipV6F4tM--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/serverless/assets/master/Icon/Framework/PNG/Serverless_Framework-icon01.png'),
-    createData('Racunko', [4.3, 12, 2, 4, 5, 1], [4.3, 12, 2, 4, 5, 43], 54352, 2345, 'Expense tracking to semi perfection', 'https://www.edigitalagency.com.au/wp-content/uploads/instagram-logo-png-paint-brush-colour-1.png'),
-    createData('Sassmark', [3.9, 15, 2, 4, 5, 100], [4.3, 12, 2, 4, 5, 11], 23452345, 234, 'We know what you sass the most', 'https://res.cloudinary.com/practicaldev/image/fetch/s--ipV6F4tM--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/serverless/assets/master/Icon/Framework/PNG/Serverless_Framework-icon01.png'),
-];
+const rows = [];
 
-export default function CompanyTable() {
+const generic_logo_url = 'https://res.cloudinary.com/practicaldev/image/fetch/s--ipV6F4tM--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://raw.githubusercontent.com/serverless/assets/master/Icon/Framework/PNG/Serverless_Framework-icon01.png';
+
+export default function CompanyTable(props) {
     const classes = useStyles();
+
+    console.log(props);
+
+    props.data.forEach(function (actor) {
+        let actor_trends = props.pulloutFinancialTrends([actor]);
+
+        let income_trend_balance = Object.keys(actor_trends.income).map(key => actor_trends.income[key]);
+        let expense_trend_balance = Object.keys(actor_trends.expense).map(key => actor_trends.expense[key]);
+        rows.push(
+            createData(
+                actor.name,
+                income_trend_balance,
+                expense_trend_balance,
+                income_trend_balance.reduce((a, b) => a + b, 0),
+                expense_trend_balance.reduce((a, b) => a + b, 0),
+                actor.businessSector.name,
+                generic_logo_url
+            )
+        );
+    });
 
     return (
         <Paper className={classes.root}>
@@ -51,7 +64,7 @@ export default function CompanyTable() {
                                 <Avatar alt="Remy Sharp" src={row.image_source} className={classes.avatar} />
                             </TableCell>
                             <TableCell component="th" scope="row">
-                                <Typography variant="h5" component="h2" gutterBottom>
+                                <Typography variant="h6" component="h6" gutterBottom>
                                     {row.name}
                                 </Typography>
                                 <Typography variant="overline" display="block" gutterBottom>
