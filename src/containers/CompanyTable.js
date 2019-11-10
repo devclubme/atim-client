@@ -46,8 +46,8 @@ export default function CompanyTable(props) {
                 actor.name,
                 income_trend_balance,
                 expense_trend_balance,
-                income_trend_balance.reduce((a, b) => a + b, 0),
-                expense_trend_balance.reduce((a, b) => a + b, 0),
+                (income_trend_balance.reduce((a, b) => a + b, 0) / 1000000).toFixed(2),
+                (expense_trend_balance.reduce((a, b) => a + b, 0) / 1000000).toFixed(2),
                 actor.businessSector.name,
                 generic_logo_url
             )
@@ -91,8 +91,8 @@ export default function CompanyTable(props) {
                                 <Typography variant="h5" component="h2" gutterBottom>
                                     Income
                                 </Typography>
-                                <Typography align="center" variant="overline" display="block" gutterBottom>
-                                    {row.income} €
+                                <Typography variant="overline" display="block" gutterBottom>
+                                    {row.income}M (€)
                                 </Typography>
                             </TableCell>
 
@@ -108,7 +108,7 @@ export default function CompanyTable(props) {
                                     radius={10.4}
                                     strokeWidth={4.1}
                                     strokeLinecap={'round'} />
-                                <Typography align="center" variant="overline" display="block" gutterBottom>
+                                <Typography variant="overline" display="block" gutterBottom>
                                     expense chart (yearly)
                                 </Typography>
                             </TableCell>
@@ -119,7 +119,7 @@ export default function CompanyTable(props) {
                                     Expense
                                 </Typography>
                                 <Typography align="center" variant="overline" display="block" gutterBottom>
-                                    {row.expense} €
+                                    {row.expense}M (€)
                                 </Typography>
                             </TableCell>
                         </TableRow>

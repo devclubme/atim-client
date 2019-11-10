@@ -38,7 +38,7 @@ export default function TrendCard(props) {
                     <ArrowDownwardIcon color="primary" />
                 }
                 title={props.title}
-                subheader={`Total ${props.data.reduce((a, b) => a + b, 0)} €`}
+                subheader={`Total ~ ${Math.round(props.data.reduce((a, b) => a + b, 0) / 1000000)} M (€)`}
             />
             <CardContent>
                 <Trend
