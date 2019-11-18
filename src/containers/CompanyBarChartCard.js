@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 
 export default function CompanyBarChartCard(props) {
     const classes = useStyles();
-    console.log(props.data)
     return (
         <Card className={classes.card}>
             <CardContent>

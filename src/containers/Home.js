@@ -38,7 +38,6 @@ export default class Home extends Component {
         actor_trends
       });
 
-      console.log(this.state.actor_trends);
     } catch (e) {
       alert(e);
     }
