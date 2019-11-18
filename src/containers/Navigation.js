@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
+        paddingLeft: theme.spacing(1),
         flexGrow: 1,
     },
     bigAvatar: {
@@ -42,7 +43,7 @@ export default function Navigation() {
                     </Avatar>
                     <Typography variant="h4" className={classes.title} style={{
                     }}>
-                        /atim
+                        atim
                     </Typography>
                     <Button color="inherit">subscribe</Button>
                 </Toolbar>
