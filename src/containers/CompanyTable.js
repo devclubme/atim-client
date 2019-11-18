@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function createData(name, protein, expense_period, income, expense, one_liner, image_source) {
-    return { name, protein, expense_period, income, expense, one_liner, image_source };
+function createData(name, income_trend_balance, expense_trend_balance, income, expense, one_liner, image_source) {
+    return { name, income_trend_balance, expense_trend_balance, income, expense, one_liner, image_source };
 }
 
 const rows = [];
@@ -34,13 +34,26 @@ const generic_logo_url = 'https://res.cloudinary.com/practicaldev/image/fetch/s-
 export default function CompanyTable(props) {
     const classes = useStyles();
 
-    console.log(props);
 
     props.data.forEach(function (actor) {
         let actor_trends = props.pulloutFinancialTrends([actor]);
 
         let income_trend_balance = Object.keys(actor_trends.income).map(key => actor_trends.income[key]);
         let expense_trend_balance = Object.keys(actor_trends.expense).map(key => actor_trends.expense[key]);
+
+        if (income_trend_balance.length === 0)
+            income_trend_balance = [0, 0];
+        else if (income_trend_balance.length === 1)
+            income_trend_balance = [0, income_trend_balance[0]]
+
+        if (expense_trend_balance.length === 0)
+            expense_trend_balance = [0, 0];
+        else if (expense_trend_balance.length === 1)
+            expense_trend_balance = [0, expense_trend_balance[0]]
+
+        if (actor.name.match(/".*?"/g) !== null)
+            actor.name = actor.name.match(/".*?"/g)[0].split(/"/g).join('');
+
         rows.push(
             createData(
                 actor.name,
@@ -61,7 +74,7 @@ export default function CompanyTable(props) {
                     {rows.map(row => (
                         <TableRow key={row.name} selected={false} hover={true}>
                             <TableCell align="right">
-                                <Avatar alt="Remy Sharp" src={row.image_source} className={classes.avatar} />
+                                <Avatar alt="Logo" src={row.image_source} className={classes.avatar} />
                             </TableCell>
                             <TableCell component="th" scope="row">
                                 <Typography variant="h6" component="h6" gutterBottom>
@@ -77,13 +90,13 @@ export default function CompanyTable(props) {
                                     autoDraw
                                     autoDrawDuration={3000}
                                     autoDrawEasing="ease-out"
-                                    data={row.protein}
+                                    data={row.income_trend_balance}
                                     gradient={['#42b3f4', '#f50057']}
                                     radius={10.4}
                                     strokeWidth={4.1}
                                     strokeLinecap={'round'} />
                                 <Typography align="center" variant="overline" display="block" gutterBottom>
-                                    income chart (yearly)
+                                    income chart(yearly)
                                 </Typography>
                             </TableCell>
 
@@ -96,20 +109,19 @@ export default function CompanyTable(props) {
                                 </Typography>
                             </TableCell>
 
-
                             <TableCell component="th" scope="row">
                                 <Trend
                                     smooth
                                     autoDraw
                                     autoDrawDuration={3000}
                                     autoDrawEasing="ease-out"
-                                    data={row.expense_period}
+                                    data={row.expense_trend_balance}
                                     gradient={['#42b3f4', '#f50057']}
                                     radius={10.4}
                                     strokeWidth={4.1}
                                     strokeLinecap={'round'} />
-                                <Typography variant="overline" display="block" gutterBottom>
-                                    expense chart (yearly)
+                                <Typography align="center" variant="overline" display="block" gutterBottom>
+                                    expense chart(yearly)
                                 </Typography>
                             </TableCell>
 

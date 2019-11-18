@@ -28,6 +28,8 @@ const useStyles = makeStyles({
 });
 
 export default function TrendCard(props) {
+    console.log('Here are dates');
+    console.log(props.data);
     const classes = useStyles();
     return (
         <Card className={classes.card}>
