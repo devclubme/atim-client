@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "aws-amplify": "^1.1.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-dnd": "^7.0.2",
