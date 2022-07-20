@@ -16,7 +16,7 @@
     "react-stripe-elements": "^1.6.0",
     "react-tag-input": "^6.3.0",
     "semantic-ui-react": "^0.85.0",
-    "terser": "^3.14.1",
+    "terser": "^4.8.1",
     "uuid": "^3.3.2"
   },
   "scripts": {
